@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+/* 24-4 */
+.App {
+  display: flex;
+}
+
+.column {
+  padding-right: 1em;
+}
+
+ul {
+  list-style: none;
+  padding-left: 16px;
+}
+
+li {
+  margin: 0.5em;
+}
+
+button {
+  width: 200px;
+}
