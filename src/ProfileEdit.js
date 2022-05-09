@@ -31,7 +31,7 @@ function ProfileEdit({ userID }) {
       }
     }
     loadUser();
-    
+
     //this cleanup only runs when the element is removed from the DOM
     return () => {
       console.log("cleanup", userID);
