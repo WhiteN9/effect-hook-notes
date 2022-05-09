@@ -29,6 +29,7 @@ function ProfileEdit() {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
 
+  //why my savedData only give back an object of {id:#}
   const submitHandler = async (event) => {
     event.preventDefault();
     const response = await fetch(

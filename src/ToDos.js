@@ -19,15 +19,15 @@ function ToDos() {
       const response = await fetch(
         "https://jsonplaceholder.typicode.com/todos?userId=2"
       );
-      console.log(
-        "promise",
-        fetch("https://jsonplaceholder.typicode.com/todos?userId=2")
-      ); //fetch is a method that starts the process of fetching, return a promise which is fulfilled once the response is available
-      console.log("response", response);
+    //   console.log(
+    //     "making a request",
+    //     fetch("https://jsonplaceholder.typicode.com/todos?userId=2")
+    //   ); //fetch is a method that starts the process of fetching, return a promise which is fulfilled once the response is available
+    //   console.log("promise", response);
 
       const userFromAPI = await response.json(); //taking JSON as input and parsing it to produce a JavaScript object.
-      console.log("promise", response.json());
-      console.log("userFromAPI", userFromAPI);
+    //   console.log("promise", response.json());
+    //   console.log("userFromAPI", userFromAPI);
 
       setToDos(userFromAPI);
     }

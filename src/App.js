@@ -2,23 +2,25 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import ProfileEdit from "./ProfileEdit";
 import ToDos from "./ToDos";
+import ClickCounter from "./ClickCounter";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [userId, setUserID] = useState(1);
 
-  useEffect(() => {
-    document.title = `You clicked ${count} times`;
-  }, [count]);
+  const userIds = [1, 2, 3, 4];
 
   return (
-    <>
-      <div>
-        <p>You clicked {count} times</p>
-        <button onClick={() => setCount(count + 1)}>Click me</button>
-      </div>
-      <ProfileEdit />
+    <div className="App">
+      <ClickCounter />
+      {userIds.map((id) => (
+        <button key={id} onClick={() => setUserID(id)}>
+          User ID {id}
+        </button>
+      ))}
+      <h2>User ID {userId}</h2>
+      <ProfileEdit userID={userId}/>
       <ToDos />
-    </>
+    </div>
   );
 }
 
