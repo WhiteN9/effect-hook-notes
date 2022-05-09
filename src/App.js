@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import ProfileEdit from "./ProfileEdit";
+import ToDos from "./ToDos";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -12,9 +14,10 @@ function App() {
     <>
       <div>
         <p>You clicked {count} times</p>
-        <button onClick={() => setCount(count+1)}>Click me</button>
+        <button onClick={() => setCount(count + 1)}>Click me</button>
       </div>
       <ProfileEdit />
+      <ToDos />
     </>
   );
 }
