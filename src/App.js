@@ -4,6 +4,9 @@ import "./App.css";
 import AlbumList from "./AlbumList";
 import UserList from "./UserList";
 
+//Potential error occured from the tests:
+//Must have an if in the album if we are testing with undefined;
+
 function App() {
   const originalDocName = document.title;
   const [currentUser, setCurrentUser] = useState({});
@@ -12,6 +15,8 @@ function App() {
   // Load data from https://jsonplaceholder.typicode.com/albums?userId=${user.id}
   const controller = new AbortController();
 
+  //this first useEffect hook, the abort might not matter too much because users are always loaded
+  
   useEffect(() => {
     setUsers([]);
     async function getUsers() {
@@ -24,9 +29,9 @@ function App() {
         setUsers(usersIDList);
       } catch (error) {
         if (error.name === "AbortError") {
-          console.log("Aborted????");
+          console.log("Aborted no users were fetched");
         } else {
-          throw error;
+          console.log("Bad link, 404 now");
         }
       }
     }
@@ -35,7 +40,7 @@ function App() {
     //clean up function can do more than just abort;
     return () => {
       controller.abort();
-      document.title = originalDocName;
+      document.title = originalDocName; //this line can be in any cleanup function that is in useEffect hook
     };
   }, []);
 
