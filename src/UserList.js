@@ -5,7 +5,14 @@ function UserList({ users, setCurrentUser }) {
     <ul className="user-list">
       {users.map((user) => (
         <li key={user.id}>
-          <button type="button" onClick={() => setCurrentUser(user)}>
+          <button
+            type="button"
+            onClick={() => {
+            //   console.log(user);
+            //   console.log(user.id);
+              setCurrentUser(user);
+            }}
+          >
             {user.name}
           </button>
         </li>

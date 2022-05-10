@@ -10,39 +10,43 @@ import AlbumList from "./AlbumList";
 import UserList from "./UserList";
 
 function App() {
-  // const [userId, setUserID] = useState(1);
-  // const userIds = [1, 2, 3, 4];
-  // console.log(userId)
-
-  const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
+  const [users, setUsers] = useState([]);
   // Load data from https://jsonplaceholder.typicode.com/albums?userId=${user.id}
+  const controller = new AbortController();
   useEffect(() => {
     setUsers([]);
     async function getUsers() {
-      const response = await fetch(
-        `https://jsonplaceholder.typicode.com/albums?userId=1`
-      );
-      const usersIDList = await response.json();
-      setUsers(usersIDList);
+      try {
+        const response = await fetch(
+          `https://jsonplaceholder.typicode.com/users`,
+          { signal: controller.signal }
+        );
+        const usersIDList = await response.json();
+        setUsers(usersIDList);
+      } catch (error) {
+        if (error.name === "AbortError") {
+          console.log("Aborted");
+        } else {
+          throw error;
+        }
+      }
     }
     getUsers();
+
+    return () => {
+      // console.log("clean",);
+      controller.abort();
+    };
   }, []);
 
-  console.log(users);
 
-  if (users) {
+  // console.log(users); // [{id:1,name:'Leanna',...},{...}]
+  console.log(currentUser);
+
+
     return (
       <div className="App">
-        {/* <ClickCounter /> */}
-        {/* {userIds.map((id) => (
-          <button key={id} onClick={() => setUserID(id)}>
-            User ID {id}
-          </button>
-        ))} */}
-        {/* <h2>User ID {userId}</h2> */}
-        {/* <ProfileEdit userID={userId}/> */}
-        {/* <ToDos /> */}
         <div className="left column">
           <UserList users={users} setCurrentUser={setCurrentUser} />
         </div>
@@ -51,8 +55,18 @@ function App() {
         </div>
       </div>
     );
-  }
-  return "Loading...";
+  
 }
 
 export default App;
+
+  // useEffect(() => {
+  //   async function getCurrentUser() {
+  //     const response = await fetch(
+  //       `https://jsonplaceholder.typicode.com/albums?userId=1`
+  //     );
+  //     const users = await response.json();
+  //     setCurrentUser(users);
+  //   }
+  //   getCurrentUser();
+  // }, []);

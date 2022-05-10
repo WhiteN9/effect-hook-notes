@@ -24,7 +24,7 @@ function ProfileEdit({ userID }) {
       } catch (error) {
         if (error.name === "AbortError") {
           //Ignore `AbortError`
-          console.log("Aborted", userID);
+          // console.log("Aborted", userID);
         } else {
           throw error;
         }
