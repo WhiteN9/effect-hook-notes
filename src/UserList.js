@@ -8,8 +8,8 @@ function UserList({ users, setCurrentUser }) {
           <button
             type="button"
             onClick={() => {
-            //   console.log(user);
-            //   console.log(user.id);
+              //   console.log(user);
+              //   console.log(user.id);
               setCurrentUser(user);
             }}
           >
