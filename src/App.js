@@ -32,8 +32,10 @@ function App() {
     }
     getUsers();
 
+    //clean up function can do more than just abort;
     return () => {
       controller.abort();
+      document.title = originalDocName;
     };
   }, []);
 
@@ -71,15 +73,18 @@ function App() {
     };
   }, [currentUser]);
 
+  //why it doesn't work here in the test
   useEffect(() => {
     // console.log(currentUser.id)
-    if (currentUser.id) {
+    // if (users.length > 0) {
+      console.log("mounted");
       document.title = "Awesome Album App";
-    } else {
-      console.log("a");
-      document.title = originalDocName;
-    }
-  }, [currentUser]);
+    // }
+    // else {
+    //   console.log("unmounted");
+    //   document.title = originalDocName;
+    // }
+  }, [users]); // <<< what kind of parameter is good here
 
   // console.log(users); // [{id:1,name:'Leanna',...},{...}]
   // console.log(currentUser);
@@ -87,10 +92,10 @@ function App() {
   return (
     <div className="App">
       <div className="left column">
-        <UserList users={users} setCurrentUser={setCurrentUser} />
+        {users && <UserList users={users} setCurrentUser={setCurrentUser} />}
       </div>
       <div className="right column">
-        <AlbumList user={currentUser} albums={albums} />
+        {albums && <AlbumList user={currentUser} albums={albums} />}
       </div>
     </div>
   );
